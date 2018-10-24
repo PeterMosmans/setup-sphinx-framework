@@ -6,12 +6,17 @@ SPHINXOPTS    =
 SPHINXBUILD   = sphinx-build
 SOURCEDIR     = source
 BUILDDIR      = build
+RELEASEDIR    = releases
+# The version tag will be read from the file VERSION
+VERSION       = $(shell cat VERSION)
+# The filename will be read from the configuration file
+FILENAME      = $(shell awk -F"[\x27\x22]" '/filename[ ]*=/{print $$2}' $(SOURCEDIR)/conf.py)
 
 # Put it first so that "make" without argument is like "make html".
-html:
+html:	showversion
 	@$(SPHINXBUILD) -M html "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
 
-.PHONY: help Makefile
+.PHONY: help Makefile showversion
 
 # Catch-all target: route all unknown targets to Sphinx using the new
 # "make mode" option.  $(O) is meant as a shortcut for $(SPHINXOPTS).
@@ -29,10 +34,18 @@ devserver: html
 	  sphinx-autobuild --port $(PORT) source build/html --ignore ".*\.\#*" -B; \
 	fi
 
-pdf:
+pdf:	showversion
 	@$(SPHINXBUILD) -b latex "$(SOURCEDIR)" "$(BUILDDIR)/latex" $(SPHINXOPTS) $(O)
 	$(MAKE) -C "$(BUILDDIR)/latex"
 	@mkdir -p "$(BUILDDIR)/pdf"
-	@mv "$(BUILDDIR)/latex"/*.pdf "$(BUILDDIR)/pdf/"
-	@echo -n "PDF can be found at "
-	@ls "$(BUILDDIR)/pdf"/*.pdf
+	@mv "$(BUILDDIR)/latex/$(FILENAME).pdf" "$(BUILDDIR)/pdf/$(FILENAME).pdf"
+	@echo "PDF can be found at $(BUILDDIR)/pdf/$(FILENAME).pdf"
+
+release: pdf
+	@mkdir -p $(RELEASEDIR) &>/dev/null
+	@cp --update "$(BUILDDIR)/pdf/$(FILENAME).pdf" "$(RELEASEDIR)/$(FILENAME)-$(VERSION).pdf"
+	@echo "PDF release $(VERSION) can be found at $(RELEASEDIR)/$(FILENAME)-$(VERSION).pdf"
+
+showversion:
+	@echo "Building version $(VERSION)"
+
