@@ -15,16 +15,15 @@ declare -A copyfiles
 
 # Files to copy
 copyfiles=(
-    [.]="Makefile VERSION"
-    [source]="conf.py"
-    [source/_static]="latex-styling.tex logo.png"
+    [.]="conf.py Makefile VERSION"
+    [_static]="latex-styling.tex logo.png"
     )
 
 # Directories to create
-createdirectories="source/_static source/_templates"
+createdirectories="_static _templates"
 
 # Files to create
-createfiles="source/index.rst"
+createfiles="index.rst"
 
 ## Don't change anything below this line
 source=$(dirname $(readlink -f $0))
@@ -34,7 +33,7 @@ if [ -z "$target" ]; then
     target=$(readlink -f .)
     # Check whether the script is being executed from within the source directory
     if [ "${target}" == "${source}" ]; then
-        echo "Usage: setup_sphinx_framework [TARGET]"
+        echo "Usage: installer [TARGET]"
         echo "       or run from within target directory"
         exit
     fi
@@ -48,7 +47,7 @@ done
 for targetdirectory in "${!copyfiles[@]}"; do
     for file in ${copyfiles[$targetdirectory]}; do
         # Never overwrite existing files
-        cp -nv ${source}/${file} ${target}/${targetdirectory}/${file}
+        cp -nv ${source}/${targetdirectory}/${file} ${target}/${targetdirectory}/${file}
     done
 done
 

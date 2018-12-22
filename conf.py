@@ -9,7 +9,7 @@ import sys
 
 
 LATEX_STYLING = "_static/latex-styling.tex"
-VERSION_FILE = "../VERSION"
+VERSION_FILE = "VERSION"
 
 
 try:

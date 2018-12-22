@@ -56,7 +56,7 @@ So all that's left when setting up a new documentation framework is creating
 some directories, copying the files, and... that's basically it.
 
 In order to take care of this, I wrote a simple Bash installer script,
-:code:`setup_sphinx_framework.sh`. A new feature in Bash version 4 is the
+:code:`installer.sh`. A new feature in Bash version 4 is the
 support of associative arrays. That functionality makes it easier to write a
 generic, reusable script which takes care of creating and copying files and
 directories.
@@ -65,7 +65,7 @@ A simple
 
 .. code-block:: console
 
-   ./setup_sphinx_framework.sh TARGET
+   ./installer.sh TARGET
 
 will set up the framework in the directory :code:`TARGET`. Of course the
 prerequisites (Sphinx and GNU Make) need to be installed as well. If they are,
