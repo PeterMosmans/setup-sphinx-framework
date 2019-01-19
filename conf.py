@@ -36,7 +36,7 @@ release = version
 # -- Project information -----------------------------------------------------
 
 project = "Go Forward documentation"
-copyright = "2018, Peter Mosmans"
+copyright = "2019, Peter Mosmans"
 author = "Peter Mosmans"
 filename = "GoForwardDocumentation"
 description = project

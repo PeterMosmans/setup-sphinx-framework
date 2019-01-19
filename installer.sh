@@ -3,7 +3,7 @@
 # setup_sphinx_framework - Sets up Sphinx framework
 # Part of the Go Forward Sphinx documentation framework
 #
-# Copyright (C) 2018 Peter Mosmans [Go Forward]
+# Copyright (C) 2018-2019 Peter Mosmans [Go Forward]
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -15,7 +15,7 @@ declare -A copyfiles
 
 # Files to copy
 copyfiles=(
-    [.]="conf.py Makefile VERSION"
+    [.]=".gitignore conf.py Makefile VERSION"
     [_static]="latex-styling.tex logo.png"
     )
 
