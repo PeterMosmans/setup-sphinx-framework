@@ -52,6 +52,13 @@ Setting up the framework
 The reusable framework consists of a collection of the files mentioned above, as
 well as some basic static files.
 
+Of course, Sphinx (and optionally the local development server
+`sphinx-autobuild`) need to be installed:
+
+.. code-block:: console
+
+   pip3 install sphinx sphinx-autobuild
+
 So all that's left when setting up a new documentation framework is creating
 some directories, copying the files, and... that's basically it.
 
