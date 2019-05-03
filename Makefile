@@ -7,6 +7,7 @@ SPHINXBUILD   = sphinx-build
 SOURCEDIR     = .
 BUILDDIR      = _build
 RELEASEDIR    = releases
+PORT          = 8080
 # The version tag will be read from the file VERSION
 VERSION       = $(shell cat VERSION)
 # The filename will be read from the configuration file
