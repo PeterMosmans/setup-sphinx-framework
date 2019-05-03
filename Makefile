@@ -30,9 +30,9 @@ help:
 devserver: html
 	# Find out if a TTY (terminal) is used or not
 	@if [ -t 1 ]; then \
-	  winpty sphinx-autobuild --port $(PORT) source build/html --re-ignore ".*/\.#*" -B; \
+	  winpty sphinx-autobuild --port $(PORT) $(SOURCEDIR) $(BUILDDIR)/html --re-ignore ".*/\.#*" -B; \
 	else \
-	  sphinx-autobuild --port $(PORT) source build/html --ignore ".*\.\#*" -B; \
+	  sphinx-autobuild --port $(PORT) $(SOURCEDIR) $(BUILDDIR)/html --ignore ".*\.\#*" -B; \
 	fi
 
 pdf:	showversion
