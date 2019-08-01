@@ -4,7 +4,6 @@
 
 from __future__ import unicode_literals
 
-import re
 import sys
 
 
@@ -15,7 +14,7 @@ VERSION_FILE = "VERSION"
 try:
     with open(LATEX_STYLING, mode="r+") as latex_styling:
         PREAMBLE = latex_styling.read()
-except FileNotFoundError as exception:
+except FileNotFoundError:
     print("Could not read {0}".format(LATEX_STYLING), file=sys.stderr)
     PREAMBLE = ""
 
@@ -23,7 +22,7 @@ except FileNotFoundError as exception:
 try:
     with open(VERSION_FILE) as version_file:
         version = version_file.read().strip()
-except FileNotFoundError as exception:
+except FileNotFoundError:
     print("Could not read {0}".format(VERSION_FILE), file=sys.stderr)
     version = "0.0.0"
 release = version
