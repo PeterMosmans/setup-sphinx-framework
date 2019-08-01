@@ -34,11 +34,18 @@ release = version
 
 # -- Project information -----------------------------------------------------
 
-project = "Go Forward documentation"
+customer = "Go Forward"
+project = f"{customer} documentation"
 copyright = "2019, Peter Mosmans"
 author = "Peter Mosmans"
-filename = "GoForwardDocumentation"
+filename = f"{customer}-documentation"
 description = project
+
+# Parameterize project-specific variables
+rst_prolog = f"""
+.. |customer| replace:: {customer}
+"""
+
 
 
 # -- General configuration ---------------------------------------------------
