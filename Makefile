@@ -6,6 +6,7 @@ SPHINXOPTS    =
 SPHINXBUILD   = sphinx-build
 SOURCEDIR     = .
 BUILDDIR      = _build
+DEPLOYDIR     = ../../deploy
 RELEASEDIR    = releases
 PORT          = 8080
 # The version tag will be read from the file VERSION
@@ -19,10 +20,21 @@ html:	showversion
 
 .PHONY: help Makefile showversion
 
-# Catch-all target: route all unknown targets to Sphinx using the new
-# "make mode" option.  $(O) is meant as a shortcut for $(SPHINXOPTS).
-%: Makefile
-	@$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
+bumpmajor: VERSION
+	semver bump major $(shell cat VERSION) > VERSION
+
+bumpminor: VERSION
+	semver bump minor $(shell cat VERSION) > VERSION
+
+bumppatch: VERSION
+	semver bump patch $(shell cat VERSION) > VERSION
+
+clean:
+	rm -rf $(BUILDDIR)/html
+
+deploy: clean html
+	cp -r $(BUILDDIR)/html/* $(DEPLOYDIR)
+	cd $(DEPLOYDIR) && git add * && git pull && git commit -m "Deploy version $(VERSION)" && git push
 
 help:
 	@$(SPHINXBUILD) -M help "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
@@ -34,6 +46,14 @@ devserver: html
 	else \
 	  sphinx-autobuild --port $(PORT) $(SOURCEDIR) $(BUILDDIR)/html --ignore ".*\.\#*" -B; \
 	fi
+
+final: showversion
+	@$(SPHINXBUILD) -M html "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) -t final $(O)
+
+handouts:
+	for i in ../slidedecks/*.odp; do \
+	  pptxtopdf.py $$i --output source/_static ; \
+	done
 
 pdf:	showversion
 	@$(SPHINXBUILD) -b latex "$(SOURCEDIR)" "$(BUILDDIR)/latex" $(SPHINXOPTS) $(O)
