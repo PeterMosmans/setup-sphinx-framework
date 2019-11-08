@@ -8,9 +8,9 @@ often, it made sense to put some effort in automating the set up of a new
 documentation framework, a reusable set up script.
 
 The standard documentation framework that I use consists of `Sphinx`_, which
-takes care of converting source pages written in :abbr:`reST (reStructuredText)`
-into several formats: For example HTML, but also PDF or something more exotic
-like ePub files. Note that Sphinx already comes with a setup script,
+takes care of converting source pages written in reStructuredText_ into several
+formats: For example HTML, but also PDF or something more exotic like ePub
+files. Note that Sphinx already comes with a setup script,
 `sphinx-quickstart`_ - but this doesn't take care of deploying files.
 
 In order to be able to create a reusable framework, I split the necessary files
@@ -20,7 +20,6 @@ into three groups:
 + version information, and
 + a LaTeX formatting template.
 
-
 The Sphinx configuration
 ========================
 
@@ -29,7 +28,6 @@ the different artifact types - as well as a Sphinx configuration file
 (:code:`conf.py`) containing basic information about the project, and plugin
 details. These files rarely change after having initialized the framework.
 
-
 Version information
 ===================
 
@@ -37,14 +35,12 @@ The version information (version, or build number) can change per release, and
 is therefore contained in a separate text file (:code:`VERSION`). Its values
 will be read and included by the build process.
 
-
 LaTeX template
 ==============
 
 Thirdly, the LaTex formatting template contains styling information that will be
 used when building PDF files, and is also stored in a separate file. This allows
 for easy updating and different re-use across projects.
-
 
 Setting up the framework
 ========================
@@ -90,4 +86,3 @@ all that's left to do is write some content in `reStructuredText`_, and let
 .. _reStructuredText: http://docutils.sourceforge.net/rst.html
 .. _Sphinx: http://www.sphinx-doc.org
 .. _`sphinx-quickstart`: http://www.sphinx-doc.org/en/master/man/sphinx-quickstart.html
-
