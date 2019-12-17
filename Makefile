@@ -30,7 +30,7 @@ bumppatch: VERSION
 	semver bump patch $(shell cat VERSION) > VERSION
 
 clean:
-	rm -rf $(BUILDDIR)/html
+	rm -rf $(BUILDDIR)/html $(BUILDDIR)/latex $(BUILDDIR)/pdf
 
 deploy: clean html
 	cp -r $(BUILDDIR)/html/* $(DEPLOYDIR)
