@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 # Configuration file for the Sphinx documentation builder.
 # Part of the Go Forward Sphinx documentation framework
+#
+# See https://github.com/PeterMosmans/setup-sphinx-framework for more information
 
 from __future__ import unicode_literals
 
@@ -22,8 +24,8 @@ except FileNotFoundError:
 try:
     with open(VERSION_FILE) as version_file:
         version = version_file.read().strip()
-except FileNotFoundError:
-    print("Could not read {0}".format(VERSION_FILE), file=sys.stderr)
+except FileNotFoundError as exception:
+    print(f"Could not read {VERSION_FILE}: {exception}", file=sys.stderr)
     version = "0.0.0"
 release = version
 
@@ -36,9 +38,10 @@ release = version
 
 customer = "Go Forward"
 project = f"{customer} documentation"
-copyright = "2019, Peter Mosmans"
+copyright = "2020, Peter Mosmans"
 author = "Peter Mosmans"
-filename = f"{customer}-documentation"
+# Note that the variable filename cannot contain any formatting or substitutions
+filename = "Go_Forward-documentation"
 description = project
 
 # Parameterize project-specific variables
