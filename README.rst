@@ -53,7 +53,7 @@ Of course, Sphinx (and optionally the local development server
 
 .. code-block:: console
 
-   pip3 install sphinx sphinx-autobuild
+   pip3 install -U sphinx sphinx-autobuild
 
 So all that's left when setting up a new documentation framework is creating
 some directories, copying the files, and... that's basically it.
